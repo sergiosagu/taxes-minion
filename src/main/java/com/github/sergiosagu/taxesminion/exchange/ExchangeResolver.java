@@ -20,6 +20,6 @@ public interface ExchangeResolver {
      * @return Pair with the exchange rate and the actual date of that exchange
      *         value.
      */
-    Pair<Double, LocalDate> getExchange(String currency, LocalDate date);
+    Pair<Float, LocalDate> getExchange(String currency, LocalDate date);
 
 }

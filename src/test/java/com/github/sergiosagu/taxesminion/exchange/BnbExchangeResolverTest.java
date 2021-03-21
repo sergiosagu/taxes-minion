@@ -18,8 +18,8 @@ public class BnbExchangeResolverTest {
 
     @Test
     public void getValidExchange() {
-        Pair<Double, LocalDate> value = resolver.getExchange("USD", LocalDate.of(2020, 1, 1));
-        assertEquals(1.74737, value.getFirst());
+        Pair<Float, LocalDate> value = resolver.getExchange("USD", LocalDate.of(2020, 1, 1));
+        assertEquals(1.74737f, value.getFirst());
         assertEquals(LocalDate.of(2020, 1, 2), value.getSecond());
     }
 

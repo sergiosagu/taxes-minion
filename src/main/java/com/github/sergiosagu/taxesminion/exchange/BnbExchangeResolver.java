@@ -15,6 +15,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ import org.w3c.dom.Document;
  * Exchange resolver implementation for the BNB site (https://www.bnb.bg/).
  */
 @Component
+@Qualifier("bnb")
 public class BnbExchangeResolver implements ExchangeResolver {
 
     private static final Logger LOG = LoggerFactory.getLogger(BnbExchangeResolver.class);
@@ -51,7 +53,7 @@ public class BnbExchangeResolver implements ExchangeResolver {
     }
 
     @Override
-    public Pair<Double, LocalDate> getExchange(String currency, LocalDate date) {
+    public Pair<Float, LocalDate> getExchange(String currency, LocalDate date) {
         LOG.info("Getting 'BGN' exchange rate for 1 '{}' on '{}'...", currency, date);
 
         LocalDate startDate = date;
@@ -94,7 +96,7 @@ public class BnbExchangeResolver implements ExchangeResolver {
             
             LOG.info("The exchange rate was '{}' on '{}'.", exchangeRate, exchangeDate);
             
-            return Pair.of(exchangeRate, exchangeDate);
+            return Pair.of(exchangeRate.floatValue(), exchangeDate);
 
         } catch (Exception e) {
             LOG.error("Invalid response! Unexpected XML format!", e);
